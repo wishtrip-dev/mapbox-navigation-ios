@@ -43,7 +43,6 @@ class RouteMapViewController: UIViewController, PulleyPrimaryContentControllerDe
 
     let webImageManager = SDWebImageManager.shared()
     var shieldAPIDataTask: URLSessionDataTask?
-    var wayNameShieldDataTask: URLSessionDataTask?
     var shieldImageDownloadToken: SDWebImageDownloadToken?
     var arrowCurrentStep: RouteStep?
     var isInOverviewMode = false
