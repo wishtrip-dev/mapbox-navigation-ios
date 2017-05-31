@@ -4,8 +4,6 @@
 <dict>
 	<key>I</key>
 	<string>I-{ref}.svg</string>
-	<key>us-interstate</key>
-	<string>I-{ref}.svg</string>
 	<key>US</key>
 	<string>US {ref}.svg</string>
 	<key>SR</key>
