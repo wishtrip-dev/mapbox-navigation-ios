@@ -43,6 +43,7 @@ class RouteMapViewController: UIViewController, PulleyPrimaryContentControllerDe
 
     let webImageManager = SDWebImageManager.shared()
     var shieldAPIDataTask: URLSessionDataTask?
+    var wayNameShieldDataTask: URLSessionDataTask?
     var shieldImageDownloadToken: SDWebImageDownloadToken?
     var arrowCurrentStep: RouteStep?
     var isInOverviewMode = false
@@ -331,6 +332,7 @@ extension RouteMapViewController: NavigationMapViewDelegate {
             let features = mapView.visibleFeatures(at: userPuck, styleLayerIdentifiers: Set([roadLabelLayerIdentifier]))
             var smallestLabelDistance = Double.infinity
             var currentName: String?
+            var currentHighway: [String:String] = [:]
             
             for feature in features {
                 var allLines: [MGLPolyline] = []
@@ -364,7 +366,25 @@ extension RouteMapViewController: NavigationMapViewDelegate {
                         } else {
                             currentName = nil
                         }
+                        
+                        if let line = feature as? MGLPolylineFeature, let ref = line.attribute(forKey: "ref") as? String, let shield = line.attribute(forKey: "shield") as? String {
+                            currentHighway["ref"] = ref
+                            currentHighway["shield"] = shield
+                        } else if let line = feature as? MGLMultiPolylineFeature, let ref = line.attribute(forKey: "ref") as? String, let shield = line.attribute(forKey: "shield") as? String {
+                            currentHighway["ref"] = ref
+                            currentHighway["shield"] = shield
+                        } else {
+                            currentHighway.removeAll()
+                        }
                     }
+                }
+                
+                print(currentHighway["ref"], currentHighway["shield"])
+            }
+            
+            if currentHighway["ref"] != nil && currentHighway["shield"] != nil {
+                wayNameShieldDataTask = dataTaskForShieldImage(network: currentHighway["shield"]!, number: currentHighway["ref"]!, height: 32 * UIScreen.main.scale) { (image) in
+                    print(image)
                 }
             }
             
