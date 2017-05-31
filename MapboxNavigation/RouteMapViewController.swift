@@ -378,19 +378,21 @@ extension RouteMapViewController: NavigationMapViewDelegate {
                         }
                     }
                 }
-                
-                print(currentHighway["ref"], currentHighway["shield"])
             }
             
-            if currentHighway["ref"] != nil && currentHighway["shield"] != nil {
-                wayNameShieldDataTask = dataTaskForShieldImage(network: currentHighway["shield"]!, number: currentHighway["ref"]!, height: 32 * UIScreen.main.scale) { (image) in
-                    print(image)
+            if smallestLabelDistance < 5 {
+                if currentName != nil && !currentHighway.isEmpty {
+                    wayNameLabel.text = "\(String(describing: currentName!)) - \(String(describing: currentHighway["shield"]!.components(separatedBy: "-").first!).localizedUppercase)-\(String(describing: currentHighway["ref"]!))"
+                    wayNameView.isHidden = false
+                } else if currentName != nil && currentHighway.isEmpty {
+                    wayNameLabel.text = currentName
+                    wayNameView.isHidden = false
+                } else if currentName == nil && !currentHighway.isEmpty {
+                    wayNameLabel.text = "\(String(describing: currentHighway["shield"]!.components(separatedBy: "-").first!).localizedUppercase)-\(String(describing: currentHighway["ref"]!))"
+                    wayNameView.isHidden = false
+                } else {
+                    wayNameView.isHidden = false
                 }
-            }
-            
-            if smallestLabelDistance < 5 && currentName != nil {
-                wayNameLabel.text = currentName
-                wayNameView.isHidden = false
             } else {
                 wayNameView.isHidden = true
             }
