@@ -43,7 +43,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.module_name = "MapboxNavigation"
 
-  s.dependency "MapboxCoreNavigation", "0.12.2" #"#{s.version.to_s}"
+  s.dependency "MapboxCoreNavigation", "#{s.version.to_s}"
   s.dependency "Mapbox-iOS-SDK", "~> 3.6"
   s.dependency "SDWebImage", "~> 4.1"
   s.dependency "AWSPolly", "~> 2.6"
