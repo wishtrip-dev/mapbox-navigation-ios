@@ -3,6 +3,11 @@ import CoreLocation
 import MapboxDirections
 
 /**
+ Key used for accessing the `CLLocation` object from LocationManager's didUpdateLocations.
+ */
+public let RouteControllerDidUpdateLocationKey = "RouteControllerDidUpdateLocationKey"
+
+/**
  Key used for accessing the `RouteProgress` object from a `RouteControllerProgressDidChange` notification's `userInfo` dictionary.
  */
 public let RouteControllerProgressDidChangeNotificationProgressKey = MBRouteControllerProgressDidChangeNotificationProgressKey
@@ -46,6 +51,11 @@ public let RouteControllerNotificationErrorKey = MBRouteControllerNotificationEr
  Key used for accessing a `Bool` as to whether the reroute occurced because a faster route was found.
  */
 public let RouteControllerDidFindFasterRouteKey = MBRouteControllerDidFindFasterRouteKey
+
+/**
+ Emitted when the user moves along the route.
+ */
+public let routeControllerDidUpdateLocation = Notification.Name("RouteControllerDidUpdateLocation")
 
 /**
  Emitted when the user moves along the route.

@@ -443,6 +443,10 @@ extension RouteController: CLLocationManagerDelegate {
         guard let location = locations.last else {
             return
         }
+      
+      NotificationCenter.default.post(name: .routeControllerDidUpdateLocation, object: self, userInfo: [
+        RouteControllerDidUpdateLocationKey: location
+        ])
         self.rawLocation = location
         
         sessionState.pastLocations.push(location)
