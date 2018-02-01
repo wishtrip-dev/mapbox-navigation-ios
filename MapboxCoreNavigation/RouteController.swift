@@ -444,7 +444,7 @@ extension RouteController: CLLocationManagerDelegate {
             return
         }
       
-      NotificationCenter.default.post(name: .routeControllerDidUpdateLocation, object: self, userInfo: [
+      NotificationCenter.default.post(name: routeControllerDidUpdateLocation, object: self, userInfo: [
         RouteControllerDidUpdateLocationKey: location
         ])
         self.rawLocation = location
