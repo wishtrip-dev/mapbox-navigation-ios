@@ -325,7 +325,7 @@ open class RouteController: NSObject {
      */
     @objc public var location: CLLocation? {
         guard let location = rawLocation else { return nil }
-
+      
         var nearByCoordinates = routeProgress.currentLegProgress.nearbyCoordinates
 
         // If the upcoming maneuver a sharp turn, only look at the current step for snapping.
@@ -509,6 +509,11 @@ extension RouteController: CLLocationManagerDelegate {
         guard let location = locations.last else {
             return
         }
+    NotificationCenter.default.post(name: .routeControllerDidUpdateLocation, object: self, userInfo: [
+          RouteControllerDidUpdateLocationKey: location
+        ])
+      
+      
         self.rawLocation = location
 
         sessionState.pastLocations.push(location)

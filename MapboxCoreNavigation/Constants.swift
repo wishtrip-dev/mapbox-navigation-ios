@@ -8,6 +8,11 @@ import MapboxDirections
 public let RouteControllerProgressDidChangeNotificationProgressKey = MBRouteControllerProgressDidChangeNotificationProgressKey
 
 /**
+ Key used for accessing the `CLLocation` object from LocationManager's didUpdateLocations.
+ */
+public let RouteControllerDidUpdateLocationKey = "RouteControllerDidUpdateLocationKey"
+
+/**
  Key used for accessing the `CLLocation` object from a `RouteControllerProgressDidChange` notification's `userInfo` dictionary.
  */
 public let RouteControllerProgressDidChangeNotificationLocationKey = MBRouteControllerProgressDidChangeNotificationLocationKey
@@ -43,6 +48,12 @@ public let RouteControllerDidFindFasterRouteKey = MBRouteControllerDidFindFaster
 public let RouteControllerDidPassSpokenInstructionPointRouteProgressKey = MBRouteControllerDidPassSpokenInstructionPointRouteProgressKey
 
 extension Notification.Name {
+  
+  /**
+   Emitted when the user moves along the route.
+   */
+  public static let routeControllerDidUpdateLocation = Notification.Name("RouteControllerDidUpdateLocation")
+  
     /**
      Emitted after the user has gone off-route but the `RouteController` failed to reroute.
      */
